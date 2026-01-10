@@ -1,0 +1,11 @@
+enable ipforwarding
+
+configure vlan Radiology ipaddress 10.10.1.1/24
+configure vlan Clinical ipaddress 10.10.2.1/24
+configure vlan Admin ipaddress 10.10.3.1/24           
+configure vlan Guest ipaddress 10.10.4.1/24
+configure vlan Transit ipaddress 10.10.99.1/30
+
+
+
+
