@@ -1,0 +1,23 @@
+     PVST-Plus mode
+* EXOS-VM.66 # configure stpd s0 add vlan Guest ports all dot1d
+* EXOS-VM.67 # configure stpd s0 add vlan Clinical ports all dot1d
+* EXOS-VM.68 # configure stpd s0 add vlan Admin ports all dot1d
+* EXOS-VM.69 # configure stpd s0 add vlan Transit ports all dot1d
+* EXOS-VM.70 # configure stpd s0 add vlan Radiology ports all dot1d
+
+
+# - this is RSTP config
+configure stpd s0 mode dot1w
+configure stpd s0 add vlan [vlan name] [all or port list]
+enable stpd s0
+
+##s0 is stpd name
+
+To add tagged ports to stpd s0 (s0 is the domain), do this:
+
+configure vlan Admin add ports 3 tagged stpd s0
+configure vlan Radiology add ports 4,5 tagged stpd s0
+configure vlan Clinical add ports 6,7 tagged stpd s0
+configure vlan Guest add ports 8 tagged stpd s0
+
+adjust port numbers as needed. These ports reflect core switch.

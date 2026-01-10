@@ -1,0 +1,21 @@
+##default route to core SVI for all access switches :
+
+configure iproute add default 10.10.3.1
+
+## management IP's for VLAN 30 :
+
+IT_Access switch :
+
+configure vlan Admin ipaddress 10.10.3.2/24
+
+Radiology switch:
+
+configure vlan Admin ipaddress 10.10.3.3/24
+
+Clinical switch: 
+
+configure vlan Admin ipaddress 10.10.3.4/24
+
+Guest switch :
+
+configure vlan Admin ipaddress 10.10.3.5/24

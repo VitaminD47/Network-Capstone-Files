@@ -1,0 +1,42 @@
+configure vlan default delete ports all
+configure vlan default delete ports 1-11
+create vlan Admin
+configure vlan Admin tag 30
+create vlan Clinical
+configure vlan Clinical tag 20
+create vlan Radiology
+configure vlan Radiology tag 10
+
+access port config/enablement :
+
+enable ports all
+## radiology only## configure vlan 10 add ports 1-10 untagged
+## clinical only## configure vlan 20 add ports 1-10 untagged
+## admin only## configure vlan 30 add ports 1-10 untagged
+
+** guest vlan 40 not included as it is not permitted LAN access
+
+guest access switch port config :
+
+configure vlan default delete ports all
+configure vlan default delete ports 1-11
+create vlan Admin
+configure vlan Admin tag 30
+create vlan Guest
+configure vlan guest tag 40
+configure vlan 40 add ports 1-11 untagged
+configure vlan 40 add ports 12 tagged
+
+
+
+
+
+**tagging ports for radiology/clinic :
+configure vlan 10 add ports 11 tagged
+configure vlan 20 add ports 11 tagged
+configure vlan 30 add ports 11 tagged
+
+
+
+
+
