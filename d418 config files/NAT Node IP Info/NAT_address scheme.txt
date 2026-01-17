@@ -1,0 +1,7 @@
+The following was taken from a windows vm's ipconfig :
+
+ipv4 address : 192.168.122.19
+subnet mask : 255.255.255.0
+192.168.122.1
+
+These IP's will be needed for WAN connectivity on firewall/router interfaces.
