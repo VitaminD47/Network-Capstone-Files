@@ -1,6 +1,0 @@
-show vlan
-show stpd s0
-show sharing
-show ip route
-show ports
-show configuration
