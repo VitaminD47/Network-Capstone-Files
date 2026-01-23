@@ -10,12 +10,12 @@ configure vlan Admin ipaddress 10.10.3.2/24
 
 Radiology switch:
 
-configure vlan Admin ipaddress 10.10.3.3/24
+configure vlan Radiology ipaddress 10.10.3.3/24
 
 Clinical switch: 
 
-configure vlan Admin ipaddress 10.10.3.4/24
+configure vlan Clinical ipaddress 10.10.3.4/24
 
 Guest switch :
 
-configure vlan Admin ipaddress 10.10.3.5/24
+configure vlan Guest ipaddress 10.10.3.5/24

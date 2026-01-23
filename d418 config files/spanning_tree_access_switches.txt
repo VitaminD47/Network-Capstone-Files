@@ -4,9 +4,14 @@ This is a re-usable config for RSTP on the exos access switches. It accounts for
 disable stpd s0
 configure stpd s0 mode dot1w
 enable stpd s0
-configure stpd s0 priority 
-configure stpd s0 priority 32768
 
+
+# add each one to each respective access switch
+config stpd s0 add vlan default add ports all
+config stpd s0 add vlan Admin add ports all
+config stpd s0 add vlan Clinical add ports all
+config stpd s0 add vlan Guest add ports all 
+config stpd s0 add vlan Radiology add ports all
 
 note : for radiology/clinic switches, use this line for the last line instead:
 configure stpd s0 add vlan 10 ports 11

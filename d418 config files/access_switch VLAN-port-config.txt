@@ -10,6 +10,7 @@ configure vlan Radiology tag 10
 access port config/enablement :
 
 enable ports all
+
 ## radiology only## configure vlan 10 add ports 1-10 untagged
 ## clinical only## configure vlan 20 add ports 1-10 untagged
 ## admin only## configure vlan 30 add ports 1-10 untagged

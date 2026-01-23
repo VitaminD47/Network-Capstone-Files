@@ -1,0 +1,16 @@
+enable ip-security dhcp-snooping vlan Radiology ports 1-11 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin ports 1-11 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Clinical ports 1-11 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Guest ports 1-11 violation-action drop-packet
+
+
+## all switches ##
+
+configure trusted-ports 11 trust-for dhcp-server  -- radiology/clinic only
+configure trusted-ports 12 trust-for dhcp-server  -- admin/guest# 
+
+##
+configure ports 1-11 vlan Radiology limit-learning 10 action stop-learning
+configure ports 1-11 vlan Clinical limit-learning 10 action stop-learning
+configure ports 1-11 vlan Admin limit-learning 10 action stop-learning
+configure ports 1-11 vlan Guest unlimited-learning
