@@ -1,0 +1,16 @@
+##temp fix for vpn
+
+configure
+delete vpn ipsec site-to-site peer 192.168.122.124
+set vpn ipsec site-to-site peer 192.168.122.20
+set vpn ipsec site-to-site peer 192.168.122.20 authentication mode pre-shared-secret
+set vpn ipsec site-to-site peer 192.168.122.20 authentication pre-shared-secret 'YOUR_PSK'
+set vpn ipsec site-to-site peer 192.168.122.20 ike-group IKE-OPN
+set vpn ipsec site-to-site peer 192.168.122.20 default-esp-group ESP-OPN
+set vpn ipsec site-to-site peer 192.168.122.20 connection-type initiate
+set vpn ipsec site-to-site peer 192.168.122.20 local-address 192.168.122.125
+set vpn ipsec site-to-site peer 192.168.122.20 tunnel 1 local prefix 10.20.1.0/29
+set vpn ipsec site-to-site peer 192.168.122.20 tunnel 1 remote prefix 10.10.20.0/29
+commit
+save
+exit
