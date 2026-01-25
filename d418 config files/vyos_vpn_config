@@ -50,7 +50,7 @@ set vpn ipsec site-to-site peer 192.168.122.124 authentication mode 'pre-shared-
 set vpn ipsec site-to-site peer 192.168.122.124 authentication pre-shared-secret 'mainspring#1'
 
 set vpn ipsec site-to-site peer 192.168.122.124 ike-group 'IKE-OPN'
-set vpn ipsec site-to-site peer 192.168.122.124 esp-group 'ESP-OPN'
+set vpn ipsec site-to-site peer 192.168.122.124 default-esp-group 'ESP-OPN'
 
 # Actively initiate tunnel
 set vpn ipsec site-to-site peer 192.168.122.124 connection-type 'initiate'
