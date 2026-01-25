@@ -1,0 +1,66 @@
+############################
+# Interface Configuration
+############################
+
+set interfaces ethernet eth0 address 192.168.122.125/24
+set interfaces ethernet eth1 address 10.20.1.1/29
+
+############################
+# Default Route
+############################
+
+set protocols static route 0.0.0.0/0 next-hop 192.168.122.1
+
+############################
+# IPsec Phase 1 (IKE)
+############################
+
+set vpn ipsec ike-group IKE-OPN key-exchange 'ikev2'
+set vpn ipsec ike-group IKE-OPN lifetime '28800'
+set vpn ipsec ike-group IKE-OPN proposal 10 encryption 'aes256'
+set vpn ipsec ike-group IKE-OPN proposal 10 hash 'sha256'
+set vpn ipsec ike-group IKE-OPN proposal 10 dh-group '14'
+
+# Optional but recommended (doc-aligned, stability)
+set vpn ipsec ike-group IKE-OPN dead-peer-detection action 'restart'
+set vpn ipsec ike-group IKE-OPN dead-peer-detection interval '30'
+set vpn ipsec ike-group IKE-OPN dead-peer-detection timeout '120'
+
+############################
+# IPsec Phase 2 (ESP)
+############################
+
+set vpn ipsec esp-group ESP-OPN mode 'tunnel'
+set vpn ipsec esp-group ESP-OPN lifetime '3600'
+set vpn ipsec esp-group ESP-OPN pfs 'enable'
+set vpn ipsec esp-group ESP-OPN proposal 10 encryption 'aes256'
+set vpn ipsec esp-group ESP-OPN proposal 10 hash 'sha256'
+
+############################
+# Enable IPsec on WAN Interface
+############################
+
+set vpn ipsec interface 'eth0'
+
+############################
+# Site-to-Site Peer (OPNsense)
+############################
+
+set vpn ipsec site-to-site peer 192.168.122.124 authentication mode 'pre-shared-secret'
+set vpn ipsec site-to-site peer 192.168.122.124 authentication pre-shared-secret 'mainspring#1'
+
+set vpn ipsec site-to-site peer 192.168.122.124 ike-group 'IKE-OPN'
+set vpn ipsec site-to-site peer 192.168.122.124 esp-group 'ESP-OPN'
+
+# Actively initiate tunnel
+set vpn ipsec site-to-site peer 192.168.122.124 connection-type 'initiate'
+
+# Local WAN IP for IKE
+set vpn ipsec site-to-site peer 192.168.122.124 local-address '192.168.122.125'
+
+############################
+# Policy-Based Tunnel Selectors (Child SA)
+############################
+
+set vpn ipsec site-to-site peer 192.168.122.124 tunnel 1 local prefix '10.20.1.0/29'
+set vpn ipsec site-to-site peer 192.168.122.124 tunnel 1 remote prefix '10.10.20.0/29'
