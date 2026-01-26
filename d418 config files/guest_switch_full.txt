@@ -1,5 +1,24 @@
 
-EXOS-VM.10 # show conf
+EXOS-VM.4 #
+EXOS-VM.4 # show configuration | include stpd
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Guest ports 1-12 dot1d
+EXOS-VM.5 # configure stpd s0 delete vlan Guest ports all
+* EXOS-VM.6 # configure stpd s0 add vlan Guest ports 12
+* EXOS-VM.7 # show configuration | include stpd
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Guest ports 12 dot1d
+* EXOS-VM.8 # save
+The configuration file primary.cfg already exists.
+Do you want to save configuration to primary.cfg and overwrite it? (y/N) Yes
+Saving configuration primary.cfg  on master .. done!
+Configuration saved to primary.cfg successfully.
+EXOS-VM.9 # clear screen
+EXOS-VM.10 # show configuration
 #
 # Module devmgr configuration.
 #
@@ -142,10 +161,10 @@ configure ports 12 debounce time 0
 # Module ipSecurity configuration.
 #
 enable ip-security dhcp-snooping vlan Guest port 1 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Guest port 2 violation-action drop-packet 
+enable ip-security dhcp-snooping vlan Guest port 2 violation-action drop-packet
 enable ip-security dhcp-snooping vlan Guest port 3 violation-action drop-packet
 enable ip-security dhcp-snooping vlan Guest port 4 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Guest port 5 violation-action drop-packet 
+enable ip-security dhcp-snooping vlan Guest port 5 violation-action drop-packet
 enable ip-security dhcp-snooping vlan Guest port 6 violation-action drop-packet
 enable ip-security dhcp-snooping vlan Guest port 7 violation-action drop-packet
 enable ip-security dhcp-snooping vlan Guest port 8 violation-action drop-packet
@@ -231,7 +250,7 @@ configure snmpv3 engine-id 03:0c:ac:8a:10:00:00
 disable stpd s0
 configure stpd s0 mode dot1w
 enable stpd s0
-configure stpd s0 add vlan Guest ports 1-12 dot1d
+configure stpd s0 add vlan Guest ports 12 dot1d
 
 #
 # Module techSupport configuration.

@@ -1,5 +1,156 @@
 
-EXOS-VM.54 # show conf
+You are accessing a secure networked device within the Skyreach Health Network.
+This system is for authorized users only. The network is monitored with no
+expectations of privacy. Unauthorized users accessing this device may be
+subject to legal action. By proceeding with login, you agree to abide by
+the organization's Acceptable Use Policy.
+
+login:
+You are accessing a secure networked device within the Skyreach Health Network.
+This system is for authorized users only. The network is monitored with no
+expectations of privacy. Unauthorized users accessing this device may be
+subject to legal action. By proceeding with login, you agree to abide by
+the organization's Acceptable Use Policy.
+
+login: admin
+password:
+
+ExtremeXOS
+Copyright (C) 1996-2020 Extreme Networks. All rights reserved.
+This product is protected by one or more US patents listed at https://www.extrem            enetworks.com/company/legal/patents/ along with their foreign counterparts.
+==============================================================================
+
+
+Press the <tab> or '?' key at any time for completions.
+Remember to save your configuration changes.
+
+There have been 2 successful logins since last reboot and 0 failed logins since             last successful login
+Last successful login was on: Mon Jan 26 15:08:49 2026
+
+
+
+EXOS-VM.1 # show configuration | include stp
+# Module stp configuration.
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 11 dot1d
+configure stpd s0 add vlan Clinical ports 11 dot1d
+configure stpd s0 add vlan Radiology ports 1-11 dot1d
+EXOS-VM.2 # show stpd detail
+
+Stpd: s0                Stp: ENABLED            Number of Ports: 11
+Rapid Root Failover: Disabled
+Operational Mode: 802.1W                        Default Binding Mode: 802.1D
+802.1Q Tag: (none)
+Ports: 1,2,3,4,5,6,7,8,9,10,
+       11*
+Participating Vlans: Admin,Clinical,Radiology
+Auto-bind Vlans: Default
+Bridge Priority            : 32768              Bridge Priority Mode: 802.1t
+Operational Bridge Priority: 32768
+BridgeID                   : 80:00:0c:e8:57:fe:00:00
+Designated root            : 10:00:0c:9a:1e:3d:00:00
+RootPathCost: 180000    Root Port     : 11
+MaxAge      : 20s       HelloTime     : 2s      ForwardDelay     : 15s
+CfgBrMaxAge : 20s       CfgBrHelloTime: 2s      CfgBrForwardDelay: 15s
+Topology Change Time           : 35s            Hold time        : 1s
+Topology Change Detected       : FALSE          Topology Change  : FALSE
+Number of Topology Changes     : 1
+Time Since Last Topology Change: 18599s
+Topology Change initiated locally on Port 11
+Topology Change last received on Port none from none
+Backup Root               : Off         Backup Root Activated  : FALSE
+Loop Protect Event Window : 180s        Loop Protect Threshold : 3
+New Root Trap             : On          Topology Change Trap   : Off
+Tx Hold Count             : 6
+Participating VLANs:
+VLAN                                     Tag    Number of Ports
+          Ports
+-------------------------------------------------------------------------------
+Admin                                    30     1
+          11*(F)
+Clinical                                 20     1
+          11*(F)
+Radiology                                10     11
+          1(F),2(F),3(F),4(D),5(D),6(D),7(D),8(D),
+          9(D),10(D),11*(F)
+Flags: B-Blocking, D-Disabled, F-Forwarding, I-Listening, L-Learning
+
+
+EXOS-VM.3 # Configuration session timed out!
+You are accessing a secure networked device within the Skyreach Health Network.
+This system is for authorized users only. The network is monitored with no
+expectations of privacy. Unauthorized users accessing this device may be
+subject to legal action. By proceeding with login, you agree to abide by
+the organization's Acceptable Use Policy.
+
+login: admin
+password:
+
+ExtremeXOS
+Copyright (C) 1996-2020 Extreme Networks. All rights reserved.
+This product is protected by one or more US patents listed at https://www.extrem            enetworks.com/company/legal/patents/ along with their foreign counterparts.
+==============================================================================
+
+
+Press the <tab> or '?' key at any time for completions.
+Remember to save your configuration changes.
+
+There have been 3 successful logins since last reboot and 0 failed logins since             last successful login
+Last successful login was on: Mon Jan 26 19:53:41 2026
+
+
+
+EXOS-VM.1 # configure stpd s0 de
+  default-encapsulation  Default BPDU encapsulation mode for new port bindings
+  delete                 Delete ports in a vlan from a STP domain
+  description            Add a text description
+EXOS-VM.1 # configure stpd s0 delete vlan Radiology ports all
+* EXOS-VM.2 # configure stpd s0 add vlan Radiology ports 11g
+                                                           ^
+%% Invalid port number detected at '^' marker.
+* EXOS-VM.2 # configure stpd s0 add vlan Radiology ports 11 dot1d
+* EXOS-VM.3 # show configuration | stpd
+                                   ^
+%% Invalid input detected at '^' marker.
+* EXOS-VM.4 # show configuration | stp
+                                   ^
+%% Invalid input detected at '^' marker.
+* EXOS-VM.5 # show configuration | stpd
+                                   ^
+%% Invalid input detected at '^' marker.
+* EXOS-VM.6 # show configuration | inc stp
+# Module stp configuration.
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 11 dot1d
+configure stpd s0 add vlan Clinical ports 11 dot1d
+configure stpd s0 add vlan Radiology ports 11 dot1d
+* EXOS-VM.7 # configure stpd s0 delete vlan Admin ports all
+* EXOS-VM.8 # configure stpd s0 delete vlan Clinical ports all
+* EXOS-VM.9 # show configuration | inc stp
+# Module stp configuration.
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Radiology ports 11 dot1d
+* EXOS-VM.10 # configure stpd s0 add vlan Radiology ports 11?
+  <port_list>     Ports in this VLAN to add
+* EXOS-VM.10 # save
+The configuration file primary.cfg already exists.
+Do you want to save configuration to primary.cfg and overwrite it? (y/N) Yes
+Saving configuration primary.cfg  on master .. done!
+Configuration saved to primary.cfg successfully.
+EXOS-VM.11 # show configuration | inc stp
+# Module stp configuration.
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Radiology ports 11 dot1d
+EXOS-VM.12 # clear screen
+EXOS-VM.13 # show configuration
 #
 # Module devmgr configuration.
 #
@@ -156,17 +307,17 @@ configure ports 12 debounce time 0
 #
 # Module ipSecurity configuration.
 #
-enable ip-security dhcp-snooping vlan Radiology port 1 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 2 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 3 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 4 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 5 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 6 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 7 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 8 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 9 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 10 violation-action drop-packet
-enable ip-security dhcp-snooping vlan Radiology port 11 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Radiology port 1 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 2 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 3 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 4 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 5 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 6 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 7 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 8 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 9 violation-action drop-pac            ket
+enable ip-security dhcp-snooping vlan Radiology port 10 violation-action drop-pa            cket
+enable ip-security dhcp-snooping vlan Radiology port 11 violation-action drop-pa            cket
 configure trusted-ports 11 trust-for dhcp-server
 
 #
@@ -250,9 +401,7 @@ configure snmpv3 engine-id 03:0c:e8:57:fe:00:00
 disable stpd s0
 configure stpd s0 mode dot1w
 enable stpd s0
-configure stpd s0 add vlan Admin ports 11 dot1d
-configure stpd s0 add vlan Clinical ports 11 dot1d
-configure stpd s0 add vlan Radiology ports 1-11 dot1d
+configure stpd s0 add vlan Radiology ports 11 dot1d
 
 #
 # Module techSupport configuration.
@@ -289,4 +438,4 @@ configure stpd s0 add vlan Radiology ports 1-11 dot1d
 #
 # Module vpex configuration.
 #
-EXOS-VM.55 #
+EXOS-VM.14 #
