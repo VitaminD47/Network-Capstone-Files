@@ -1,4 +1,4 @@
-This is a re-usable config for RSTP on the exos access switches. It accounts for all vlans except the guest vlan.
+This is a re-usable config for RSTP on the exos access switches. 
 
 
 disable stpd s0
@@ -7,17 +7,14 @@ enable stpd s0
 
 
 # add each one to each respective access switch
-config stpd s0 add vlan default add ports all
-config stpd s0 add vlan Admin add ports all
-config stpd s0 add vlan Clinical add ports all
-config stpd s0 add vlan Guest add ports all 
-config stpd s0 add vlan Radiology add ports all
 
-note : for radiology/clinic switches, use this line for the last line instead:
-configure stpd s0 add vlan 10 ports 11
-configure stpd s0 add vlan 20 ports 11
-configure stpd s0 add vlan 30 ports 11
+# note only need to add port 11 on clinical/radiology since they are using the LAG config.
+
+config stpd s0 add vlan Admin add ports 12
+config stpd s0 add vlan Radiology add ports 11
+config stpd s0 add vlan Clinical add ports 11
+config stpd s0 add vlan Guest add ports 12
+config stpd s0 add vlan Radiology add ports 11
 
 
-^ last line includes both 11/12 since they will be a LAG.
 
