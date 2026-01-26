@@ -1,0 +1,47 @@
+
+--- Below is the IPSec config for the VyOS router labeled "Remote_EdgeRouter" in my GNS3 topology.
+
+### IKE (Phase 1)
+
+set vpn ipsec ike-group IKE-OPN key-exchange ikev2
+set vpn ipsec ike-group IKE-OPN lifetime 28800
+set vpn ipsec ike-group IKE-OPN proposal 10 dh-group 14
+set vpn ipsec ike-group IKE-OPN proposal 10 encryption aes256
+set vpn ipsec ike-group IKE-OPN proposal 10 hash sha256
+
+set vpn ipsec ike-group IKE-OPN dead-peer-detection action restart
+set vpn ipsec ike-group IKE-OPN dead-peer-detection interval 30
+set vpn ipsec ike-group IKE-OPN dead-peer-detection timeout 120
+
+
+
+
+### ESP (Phase 2 crypto)
+
+
+set vpn ipsec esp-group ESP-OPN mode tunnel
+set vpn ipsec esp-group ESP-OPN pfs enable
+set vpn ipsec esp-group ESP-OPN lifetime 3600
+set vpn ipsec esp-group ESP-OPN proposal 10 encryption aes256
+set vpn ipsec esp-group ESP-OPN proposal 10 hash sha256
+
+
+
+### Site-to-Site Peer Definition
+
+set vpn ipsec site-to-site peer 192.168.122.20 authentication mode pre-shared-secret
+set vpn ipsec site-to-site peer 192.168.122.20 authentication pre-shared-secret 'mainspring#1'
+
+set vpn ipsec site-to-site peer 192.168.122.20 ike-group IKE-OPN
+set vpn ipsec site-to-site peer 192.168.122.20 local-address 192.168.122.125
+set vpn ipsec site-to-site peer 192.168.122.20 default-esp-group ESP-OPN
+
+set vpn ipsec site-to-site peer 192.168.122.20 connection-type initiate
+set vpn ipsec site-to-site peer 192.168.122.20 close-action restart
+
+
+
+### Phase 2 Tunnel (Selectors)
+
+set vpn ipsec site-to-site peer 192.168.122.20 tunnel 1 local prefix 10.20.1.0/29
+set vpn ipsec site-to-site peer 192.168.122.20 tunnel 1 remote prefix 10.10.20.0/29
