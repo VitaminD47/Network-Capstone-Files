@@ -1,0 +1,428 @@
+
+You are accessing a secure networked device within the Skyreach Health Network.
+This system is for authorized users only. The network is monitored with no
+expectations of privacy. Unauthorized users accessing this device may be
+subject to legal action. By proceeding with login, you agree to abide by
+the organization's Acceptable Use Policy.
+
+login: admin
+password:
+
+ExtremeXOS
+Copyright (C) 1996-2020 Extreme Networks. All rights reserved.
+This product is protected by one or more US patents listed at https://www.extrem     enetworks.com/company/legal/patents/ along with their foreign counterparts.
+==============================================================================
+
+
+Press the <tab> or '?' key at any time for completions.
+Remember to save your configuration changes.
+
+There have been 3 successful logins since last reboot and 0 failed logins since      last successful login
+Last successful login was on: Mon Jan 26 15:46:06 2026
+
+
+
+EXOS-VM.1 # show configuration | include stp
+# Module stp configuration.
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 1-11 dot1d
+EXOS-VM.2 # show stpd
+                MSTP Global Configuration:
+MSTP Region Name        : 0cf3ac690000
+MSTP Format Identifier  : 0
+MSTP Revision Level     : 3
+MSTP Digest             : ac:36:17:7f:50:28:3c:d4:b8:38:21:d8:ab:26:de:62
+Common and Internal Spanning Tree (CIST)        : ----
+Total Number of MST Instances (MSTI)            : 0
+
+Name       Tag  Flags  Ports Bridge ID        Designated Root  Rt Port Rt Cost
+s0         0000 E-----    11 80000cf3ac690000 80000cf3ac690000 -------       0
+
+Total number of STPDs: 1                STP Flush Method: VLAN and Port
+                STP BPDU Forwarding: On
+STP Multicast Send IGMP or MLD Query: On
+
+Flags: (C) Topology Change, (D) Disable, (E) Enable, (R) Rapid Root Failover
+       (T) Topology Change Detected, (M) MSTP CIST, (I) MSTP MSTI
+EXOS-VM.3 # show stpd detail
+
+Stpd: s0                Stp: ENABLED            Number of Ports: 11
+Rapid Root Failover: Disabled
+Operational Mode: 802.1W                        Default Binding Mode: 802.1D
+802.1Q Tag: (none)
+Ports: 1,2,3,4,5,6,7,8,9,10,
+       11
+Participating Vlans: Admin
+Auto-bind Vlans: Default
+Bridge Priority            : 32768              Bridge Priority Mode: 802.1t
+Operational Bridge Priority: 32768
+BridgeID                   : 80:00:0c:f3:ac:69:00:00
+Designated root            : 80:00:0c:f3:ac:69:00:00
+RootPathCost: 0         Root Port     : ----
+MaxAge      : 20s       HelloTime     : 2s      ForwardDelay     : 15s
+CfgBrMaxAge : 20s       CfgBrHelloTime: 2s      CfgBrForwardDelay: 15s
+Topology Change Time           : 35s            Hold time        : 1s
+Topology Change Detected       : FALSE          Topology Change  : FALSE
+Number of Topology Changes     : 0
+Time Since Last Topology Change: 0s
+Topology Change initiated locally on Port none
+Topology Change last received on Port none from none
+Backup Root               : Off         Backup Root Activated  : FALSE
+Loop Protect Event Window : 180s        Loop Protect Threshold : 3
+New Root Trap             : On          Topology Change Trap   : Off
+Tx Hold Count             : 6
+Participating VLANs:
+VLAN                                     Tag    Number of Ports
+          Ports
+-------------------------------------------------------------------------------
+Admin                                    30     11
+          1(F),2(F),3(D),4(D),5(D),6(D),7(D),8(D),
+          9(D),10(D),11(D)
+Flags: B-Blocking, D-Disabled, F-Forwarding, I-Listening, L-Learning
+
+
+EXOS-VM.4 # Configuration session timed out!
+You are accessing a secure networked device within the Skyreach Health Network.
+This system is for authorized users only. The network is monitored with no
+expectations of privacy. Unauthorized users accessing this device may be
+subject to legal action. By proceeding with login, you agree to abide by
+the organization's Acceptable Use Policy.
+
+login: admin
+password:
+
+ExtremeXOS
+Copyright (C) 1996-2020 Extreme Networks. All rights reserved.
+This product is protected by one or more US patents listed at https://www.extremenetworks.com/company/legal/patents/ along with their foreign counterparts.
+==============================================================================
+
+
+Press the <tab> or '?' key at any time for completions.
+Remember to save your configuration changes.
+
+There have been 4 successful logins since last reboot and 0 failed logins since last successful login
+Last successful login was on: Mon Jan 26 19:56:13 2026
+
+
+
+EXOS-VM.1 # show configuration | inc stpd
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 1-11 dot1d
+EXOS-VM.2 # unconfigure st
+  stacking        Settings for stacking
+  stpd            STP domain/STP global configuration
+EXOS-VM.2 # unconfigure stpd s0 add
+                                ^
+%% Invalid input detected at '^' marker.
+EXOS-VM.2 # unconfigure stpd s0 ?
+  <cr>            Execute the command
+  ports           Ports in this STP domain to configure
+EXOS-VM.2 # unconfigure stpd s0 ports ?
+  link-type       802.1w port mode
+EXOS-VM.2 # configure stpd s0 de
+  default-encapsulation  Default BPDU encapsulation mode for new port bindings
+  delete                 Delete ports in a vlan from a STP domain
+  description            Add a text description
+EXOS-VM.2 # configure stpd s0 delete vlan Admin ports all
+* EXOS-VM.3 # configure stpd s0 add vlan Admin ports 12
+  <cr>            Execute the command
+  dot1d           802.1d mode
+  emistp          EMISTP mode
+  pvst-plus       PVST-Plus mode
+* EXOS-VM.3 # configure stpd s0 add vlan Admin ports 12 dot1d
+* EXOS-VM.4 # show configuration | inc stpd
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 12 dot1d
+* EXOS-VM.5 # save
+The configuration file primary.cfg already exists.
+Do you want to save configuration to primary.cfg and overwrite it? (y/N) Yes
+Saving configuration primary.cfg  on master .. done!
+Configuration saved to primary.cfg successfully.
+EXOS-VM.6 # clear screen
+EXOS-VM.7 # show configuration
+#
+# Module devmgr configuration.
+#
+configure snmp sysContact "https://www.extremenetworks.com/support/"
+configure sys-recovery-level switch reset
+
+#
+# Module vlan configuration.
+#
+configure vlan default delete ports all
+configure vr VR-Default delete ports 1-12
+configure vr VR-Default add ports 1-12
+configure vlan default delete ports 1-12
+create vlan "Admin"
+configure vlan Admin tag 30
+create vlan "Clinical"
+configure vlan Clinical tag 20
+create vlan "Radiology"
+configure vlan Radiology tag 10
+configure vlan Admin add ports 12 tagged
+configure vlan Admin add ports 1-11 untagged
+configure vlan Admin ipaddress 10.10.3.2 255.255.255.0
+configure port 1 vlan Admin limit-learning 10 action stop-learning
+configure port 2 vlan Admin limit-learning 10 action stop-learning
+configure port 3 vlan Admin limit-learning 10 action stop-learning
+configure port 4 vlan Admin limit-learning 10 action stop-learning
+configure port 5 vlan Admin limit-learning 10 action stop-learning
+configure port 6 vlan Admin limit-learning 10 action stop-learning
+configure port 7 vlan Admin limit-learning 10 action stop-learning
+configure port 8 vlan Admin limit-learning 10 action stop-learning
+configure port 9 vlan Admin limit-learning 10 action stop-learning
+configure port 10 vlan Admin limit-learning 10 action stop-learning
+configure port 11 vlan Admin limit-learning 10 action stop-learning
+
+#
+# Module mcmgr configuration.
+#
+
+#
+# Module otm configuration.
+#
+
+#
+# Module fdb configuration.
+#
+disable iparp vr VR-Mgmt refresh
+disable neighbor-discovery vr VR-Mgmt refresh
+
+#
+# Module rtmgr configuration.
+#
+configure iproute add default 10.10.3.1
+enable icmp useredirects
+
+#
+# Module policy configuration.
+#
+configure policy slices tci-overwrite 0
+
+#
+# Module aaa configuration.
+#
+
+#
+# Module acl configuration.
+#
+
+
+
+
+#
+# Module bfd configuration.
+#
+
+#
+# Module bgp configuration.
+#
+
+#
+# Module cfgmgr configuration.
+#
+
+#
+# Module dnsAnalytics configuration.
+#
+
+#
+# Module dosprotect configuration.
+#
+
+#
+# Module dot1ag configuration.
+#
+
+#
+# Module eaps configuration.
+#
+
+#
+# Module edp configuration.
+#
+
+#
+# Module elrp configuration.
+#
+
+#
+# Module ems configuration.
+#
+
+#
+# Module epm configuration.
+#
+
+#
+# Module erps configuration.
+#
+
+#
+# Module esrp configuration.
+#
+
+#
+# Module etmon configuration.
+#
+
+#
+# Module exsshd configuration.
+#
+
+#
+# Module hal configuration.
+#
+configure ports 1 debounce time 0
+configure ports 2 debounce time 0
+configure ports 3 debounce time 0
+configure ports 4 debounce time 0
+configure ports 5 debounce time 0
+configure ports 6 debounce time 0
+configure ports 7 debounce time 0
+configure ports 8 debounce time 0
+configure ports 9 debounce time 0
+configure ports 10 debounce time 0
+configure ports 11 debounce time 0
+configure ports 12 debounce time 0
+
+#
+# Module idMgr configuration.
+#
+
+#
+# Module ipSecurity configuration.
+#
+enable ip-security dhcp-snooping vlan Admin port 1 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 2 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 3 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 4 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 5 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 6 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 7 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 8 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 9 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 10 violation-action drop-packet
+enable ip-security dhcp-snooping vlan Admin port 11 violation-action drop-packet
+  configure trusted-ports 12 trust-for dhcp-server
+
+#
+# Module iqagent configuration.
+#
+
+#
+# Module isis configuration.
+#
+
+#
+# Module lldp configuration.
+#
+
+   #
+# Module mrp configuration.
+ #
+
+#
+# Module msdp configuration.
+#
+
+#
+# Module netDb configuration.
+#
+
+#
+# Module netLogin configuration.
+#
+
+#
+# Module netTools configuration.
+#
+enable dhcp vlan Mgmt
+
+  #
+# Module nodealias configuration.
+#
+
+#
+# Module ntp configuration.
+#
+
+#
+# Module ospf configuration.
+#
+
+#
+# Module ospfv3 configuration.
+#
+
+#
+# Module pim configuration.
+#
+
+#
+# Module poe configuration.
+#
+
+#
+# Module rip configuration.
+#
+
+#
+# Module ripng configuration.
+#
+
+#
+# Module snmpMaster configuration.
+#
+configure snmpv3 engine-id 03:0c:f3:ac:69:00:00
+
+#
+# Module stp configuration.
+#
+disable stpd s0
+   configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 12 dot1d
+
+#
+# Module techSupport configuration.
+#
+
+#
+# Module telnetd configuration.
+#
+
+#
+# Module tftpd configuration.
+#
+
+#
+# Module thttpd configuration.
+#
+
+#
+# Module twamp configuration.
+#
+
+#
+# Module vmt configuration.
+#
+
+   #
+# Module vrrp configuration.
+#
+
+#
+# Module vsm configuration.
+#
+
+#
+# Module vpex configuration.
+#
+EXOS-VM.8 #

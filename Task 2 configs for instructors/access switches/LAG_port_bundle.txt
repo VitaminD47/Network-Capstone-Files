@@ -1,0 +1,14 @@
+
+
+LAG config (for radiology/clinical access switches) :
+
+enable sharing 11 grouping 11,12 lacp
+
+## what's below is the necessary spanning tree config that follows ##
+disable stpd s0
+configure stpd s0 mode dot1w
+enable stpd s0
+configure stpd s0 add vlan Admin ports 11 dot1d
+configure stpd s0 add vlan Clinical ports 11 dot1d
+configure stpd s0 add vlan Radiology ports 11 dot1d
+

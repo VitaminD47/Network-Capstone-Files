@@ -1,0 +1,1 @@
+The xml file is the full configuration file for the firewalls as of 1/26/2026. 

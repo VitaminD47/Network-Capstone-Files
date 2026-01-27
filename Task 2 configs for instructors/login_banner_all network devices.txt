@@ -1,0 +1,10 @@
+exos command : configure banner before-login
+
+login banner string : You are accessing a secure networked device within the Skyreach Health Network.
+This system is for authorized users only. The network is monitored with no
+expectations of privacy. Unauthorized users accessing this device may be
+subject to legal action. By proceeding with login, you agree to abide by
+the organization's Acceptable Use Policy.
+
+
+
